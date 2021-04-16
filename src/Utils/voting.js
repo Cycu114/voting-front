@@ -1,12 +1,7 @@
 import web3 from './web3';
 
-const address = '0x73d45944EFe79E95a19A5973e32610c719c2dbAa';
+const address = '0xa9E67335FEdDDda21d2B6FD87554E7257Be72297';
 const abi = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
 	{
 		"inputs": [
 			{
@@ -36,6 +31,24 @@ const abi = [
 			}
 		],
 		"name": "delegate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "proposal",
+				"type": "uint256"
+			}
+		],
+		"name": "vote",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -79,19 +92,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "proposalThatWin",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "winningProposal",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -116,16 +116,16 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "proposalThatWin",
+		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "proposal",
+				"name": "winningProposal",
 				"type": "uint256"
 			}
 		],
-		"name": "vote",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
