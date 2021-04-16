@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  height: 100%;
+  background-color: #202020;
+  color: #fff;
+}
+
+.contentContainer {
+  height: 100%;
+  padding: 0 2rem;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  padding: 2rem 0 3rem 0;
+}
+
+.description {
+  font-size: 1.25rem;
+  word-spacing: 4px;
+}
+
+.subContainer,
+.inputContainer,
+.inputSubContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputContainer {
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 0.75rem;
+}
+
+.inputSubContainer {
+  flex-direction: row;
+  margin-top: 0.5rem;
+}
+
+.input {
+  height: 2rem;
+  border: solid #ffffff;
+  border-width: 0 0 0 2px;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  padding-left: 5px;
+  font-size: 1.1rem;
+}
+
+.button,
+.lotteryButton {
+  height: 2rem;
+  padding: 0 0.5rem;
+  outline: none;
+  border: 2px solid #ffffff;
+  border-radius: 0 6px 6px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #1a1a1a;
+  transition: 0.5s;
+}
+
+.button:hover,
+.lotteryButton:hover {
+  border-color: #000000;
+  border-width: 0 0 0 2px;
+  color: #000000;
+  background-color: #ffffff;
+  transition: 0.3s;
+}
+
+.button:active,
+.lotteryButton:active {
+  background-color: #e6e6e6;
+  transition: 0.1s;
+}
+
+.button {
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+
+.menagerHr,
+.customHr {
+  height: 1px;
+  width: 110%;
+  margin: 2rem 0;
+  margin-left: -5%;
+  outline: none;
+  border: none;
+  background-color: #ffffff;
+}
+
+.menagerHr{
+  width: 90%;
+  margin-left: 5%;
+}
+
+.text,
+.inputText,
+.questionText {
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.questionText {
+  margin-top: 1.5rem;
+}
+
+.notification {
+  margin-top: 0.5rem;
+}
+
+.footer {
+  width: 100%;
+  text-align: start;
+  font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .contentContainer {
+    height: 100%;
+    width: 100%;
+    padding: 0 23%;
+  }
+
+  .customHr {
+    width: 110%;
+    margin: 2rem 0;
+    margin-left: -6%;
+  }
+
+  .menagerHr{
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .text,
+  .inputText,
+  .questionText {
+    font-size: 1.15rem;
+  }
+
+  .description {
+    font-size: 1.35rem;
+  }
+
+  .footer {
+    text-align: end;
+  }
+}
