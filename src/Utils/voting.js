@@ -1,6 +1,6 @@
 import web3 from './web3';
 
-const address = '0xa9E67335FEdDDda21d2B6FD87554E7257Be72297';
+const address = '0xf58b99AedC0ab57c4C56333260Ce0E451013905C';
 const abi = [
 	{
 		"inputs": [
@@ -31,6 +31,19 @@ const abi = [
 			}
 		],
 		"name": "delegate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string[]",
+				"name": "data",
+				"type": "string[]"
+			}
+		],
+		"name": "setVotingNameDescription",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -166,6 +179,32 @@ const abi = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "votingDescription",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "votingName",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",

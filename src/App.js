@@ -6,22 +6,21 @@ import './App.css';
 
 export default function App() {
   const [manager, setManager] = useState();
-  const [players, setPlayers] = useState();
-  const [balance, setBalance] = useState();
   const [accounts, setAccounts] = useState();
 
-  const [value, setValue] = useState(0);
+  const [proposalArray, setProposalArray] = useState([]);
+  const [newProposal, setNewProposal] = useState('');
+
   const [isManager, setIsManager] = useState(false);
-  const [lotteryVisible, setLotteryVisible] = useState(false);
   const [notification, setNotification] = useState();
-  const [managerNotification, setManagerNotification] = useState();
 
   useEffect(() => {
     const onInit = () => {
-      api.getMenager().then((res) => setManager(res));
-      api.getPlayers().then((res) => setPlayers(res));
-      api.getBalance().then((res) => setBalance(res));
+      api.getManager().then((res) => setManager(res));
       api.getAccounts().then((res) => setAccounts(res));
+      api.getProposals().then((res) => {
+        setProposalArray(res)
+      });
     }
 
     const ethEnabled = () => {
@@ -53,96 +52,107 @@ export default function App() {
     accounts && checkIfManager()
   }, [accounts, manager]);
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    if (value === 0) {
-      setNotification('Prosze podać ilość etheru')
-      return false
-    } else if (value < 0) {
-      setNotification('Ilość etheru nie może być mniejsza niż 0')
-      return false
+  const addProposal = (newProposal) => {
+    if (newProposal) {
+      const newProposalObj = {
+        name: newProposal,
+        voteCount: 0,
+      }
+
+      setProposalArray([...proposalArray, newProposalObj])
+      setNewProposal('')
     }
+  }
 
+  const removeOption = (optionToRemove) => {
+    let tempArray = {}
+    tempArray = proposalArray.filter((option) => {
+      return optionToRemove !== option
+    })
+
+    setProposalArray(tempArray)
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
     const accounts = await api.getAccounts();
+    setNotification('Oczekiwanie na dodanie opcji wyboru...')
 
-    setNotification('Oczekiwanie na sukces transakcji...')
+    const stringProposalArray = proposalArrayToStringArray()
 
-    api.enterLottery(accounts, value)
+    api.addProposalNames(accounts, stringProposalArray)
       .then(() => {
-        api.getPlayers().then((res) => setPlayers(res));
-        api.getBalance().then((res) => setBalance(res));
-        setNotification('Dołączyłes do loterii!')
+        setNotification('Dodawanie opcji wyboru się powiodło!')
       })
       .catch(() => setNotification())
-  };
+  }
 
-  const pickWinner = async () => {
+  const proposalArrayToStringArray = () => {
+    const stringArray = []
+    proposalArray.map((proposal) => {
+      stringArray.push(proposal.name)
+    })
+
+    return stringArray;
+  }
+
+  const voteOnProposal = async (proposal) => {
     const accounts = await api.getAccounts();
 
-    setManagerNotification('Oczekiwanie na wybór zwycięzcy...')
-    api.pickWinner(accounts).then(() =>{ 
-      api.getPlayers().then((res) => setPlayers(res));
-      api.getBalance().then((res) => setBalance(res));
-      setManagerNotification('Zwyciezca został wybrany!')
-  })
-  };
+    setNotification('Oczekiwanie na wysłanie głosu...')
 
-  const handleInput = (event) => {
-    setValue(event.target.value)
+    api.vote(accounts, 0)
+      .then(() => {
+        setNotification('Wysłanie głosu powiodło się!')
+      })
+      .catch(() => setNotification('Wystąpił błąd przy wysyłaniu głosu'))
   }
 
   return (
     <div className="container">
       <div className="contentContainer">
-        <p className="title">EthoLottery</p>
-        <span className="description">
-          Blockchain w swojej naturze jest bardzo odporny na próby oszustwa dlatego jest świetnym miejscem do tworzenia wszelkich gier losowych.
-          Jako wielka rozproszona baza danych dostępna dla każdego wszelkie proby niechcianych działań są odrazu widoczne.
-      </span>
-        <hr className="customHr" />
-        <div className="subContainer">
-          {(players && balance) &&
-            <>
-              <p className="text">Obecnie {players.length} {players.length === 1 ? 'człowiek' : 'ludzi'} bierze udział w loterii.</p>
-              <p className="text">Rywalizacja o wygraną {web3.utils.fromWei(balance, 'ether')} etheru!</p>
-            </>
-          }
-          {!lotteryVisible ?
-            <>
-              <p className="questionText"> Chcesz spóbować szczęścia?</p>
-              <button
-                onClick={() => { setLotteryVisible(true) }}
-                className="button">
-                Spróbuj szczęścia
-            </button>
-            </> :
-            <div className="inputContainer">
-              <p className="inputText">Ilość eteru wysyłana do loterii</p>
-              <div className="inputSubContainer">
-                <input type='number' className="input" value={value} onChange={handleInput} />
-                <button
-                  onClick={onSubmit}
-                  className="lotteryButton">
-                  Dołącz
-              </button>
-              </div>
-              {notification && <p className="notification">{notification}</p>}
+        <h1 className="appName">Voting</h1>
+        <h1 className="title">Tytuł</h1>
+        <span className="description">Description</span>
+        {isManager ?
+          <div className="managerContainer">
+            <h2 className="subTitle">Dodawanie nowych opcji głosowania</h2>
+            <ul>
+              {proposalArray.map((option, index) => {
+                return (
+                  <li className="proposalContainer">
+                    <p id={index}>Opcja {index + 1}: {option.name}</p>
+                    <button className="proposalButton" onClick={() => removeOption(option)}>-</button>
+                  </li>
+                )
+              })}
+            </ul>
+
+            <div className="proposalInputContainer">
+              <input
+                className="proposalInput"
+                placeholder="Opcja głosowania"
+                type="text"
+                value={newProposal}
+                onChange={(e) => setNewProposal(e.target.value)} />
+              <button className="proposalButton" onClick={() => addProposal(newProposal)}>+</button>
             </div>
-          }
-        </div>
-        {isManager &&
-          <>
-            <hr className="menagerHr" />
-            <div className="subContainer">
-              <p className="text">Gotowy wybrać zwycięzcę?</p>
-              <button
-                className="button"
-                onClick={pickWinner}>
-                Wybierz zwycięzce
-              </button>
-              {managerNotification && <p className="notification">{managerNotification}</p>}
-            </div>
-          </>
+
+            <button className="submitButton" onClick={onSubmit}>Dodaj</button>
+            {notification}
+          </div> :
+          <div>
+            <h2 className="subTitle">Opcje głosowania</h2>
+            <ul>
+              {proposalArray.map((proposal, index) => {
+                return (
+                  <li className="proposalContainer">
+                    <p className="proposalBox" onClick={() => { voteOnProposal(proposal) }} id={index}>{proposal.name}</p>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         }
       </div>
       {manager && <p className="footer"> Kontrakt jest zarządzany przez: {manager}.</p>}

@@ -2,24 +2,16 @@ import voting from '../Utils/voting';
 import web3 from '../Utils/web3';
 
 class ApiServce {
-  getMenager() {
+  getManager() {
     return voting.methods.manager().call();
-  }
-
-  getProposals() {
-    return voting.methods.getProposals().call()
-  }
-
-  getBalance() {
-    return web3.eth.getBalance(voting.options.address)
   }
 
   getAccounts() {
     return web3.eth.getAccounts()
   }
 
-  getProposalThatWin(){
-    return voting.methods.proposalThatWin().call()
+  getProposals() {
+    return voting.methods.getProposals().call()
   }
 
   getWinnerProposalName(){
@@ -57,7 +49,6 @@ class ApiServce {
       }
     );
   }
-
 }
 
 const api = new ApiServce();
