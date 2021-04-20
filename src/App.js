@@ -110,7 +110,7 @@ export default function App() {
 
   return (
     <div className="container">
-      <div className="contentContainer">
+      { <div className="contentContainer">
         <h1 className="appName">Voting</h1>
         <h1 className="title">Tytuł</h1>
         <span className="description">Description</span>
@@ -154,7 +154,7 @@ export default function App() {
             </ul>
           </div>
         }
-      </div>
+      </div> }
       {manager && <p className="footer"> Kontrakt jest zarządzany przez: {manager}.</p>}
     </div>
   )

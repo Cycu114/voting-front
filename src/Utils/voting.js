@@ -1,7 +1,12 @@
 import web3 from './web3';
 
-const address = '0xf58b99AedC0ab57c4C56333260Ce0E451013905C';
+const address = '0xFb15d9c7C876f9feC337BE744DF560dd4502359e';
 const abi = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
 	{
 		"inputs": [
 			{
@@ -36,37 +41,6 @@ const abi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string[]",
-				"name": "data",
-				"type": "string[]"
-			}
-		],
-		"name": "setVotingNameDescription",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "proposal",
-				"type": "uint256"
-			}
-		],
-		"name": "vote",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "getProposals",
 		"outputs": [
@@ -80,6 +54,11 @@ const abi = [
 					{
 						"internalType": "uint256",
 						"name": "voteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
 						"type": "uint256"
 					}
 				],
@@ -105,6 +84,19 @@ const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "proposalThatWin",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "winningProposal",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -123,22 +115,40 @@ const abi = [
 				"internalType": "uint256",
 				"name": "voteCount",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "proposalThatWin",
-		"outputs": [
+		"inputs": [
+			{
+				"internalType": "string[]",
+				"name": "data",
+				"type": "string[]"
+			}
+		],
+		"name": "setVotingNameDescription",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "winningProposal",
+				"name": "proposal",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"name": "vote",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
