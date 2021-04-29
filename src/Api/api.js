@@ -1,6 +1,7 @@
 import voting from '../Utils/voting';
 import web3 from '../Utils/web3';
 
+const gasPrice = 10000000000;
 class ApiServce {
   getManager() {
     return voting.methods.manager().call();
@@ -14,40 +15,62 @@ class ApiServce {
     return voting.methods.getProposals().call()
   }
 
-  getWinnerProposalName(){
+  setTitleAndDescription(accounts, request) {
+    return voting.methods.setVotingNameDescription(request).send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    })
+  }
+
+  getWinnerProposalName() {
     return voting.methods.winnerProposalName().call()
   }
 
   addProposalNames(accounts, proposalNames) {
-    return voting.methods.addProposalNames(proposalNames).send(
-      {
-        from: accounts[0]
-      }
-    );
+    return voting.methods.addProposalNames(proposalNames).send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    });
   }
 
   clearData(accounts) {
-    return voting.methods.clearData().send(
-      {
-        from: accounts[0]
-      }
-    );
+    return voting.methods.clearData().send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    });
   }
 
   delegate(accounts, address) {
-    return voting.methods.delegate(address).send(
-      {
-        from: accounts[0]
-      }
-    );
+    return voting.methods.delegate(address).send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    });
   }
 
-  vote(accounts, index) {
-    return voting.methods.vote(index).send(
-      {
-        from: accounts[0]
-      }
-    );
+  vote(accounts, id) {
+    return voting.methods.vote(id).send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    });
+  }
+
+  finalizePoll(accounts) {
+    return voting.methods.closeVoting().send({
+      from: accounts[0],
+      gasPrice: gasPrice
+    });
+  }
+
+  isPollClosed() {
+    return voting.methods.finished().call()
+  }
+
+  getPollName() {
+    return voting.methods.votingName().call()
+  }
+
+  getPollDescription() {
+    return voting.methods.votingDescription().call()
   }
 }
 

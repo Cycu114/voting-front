@@ -6,9 +6,18 @@
   font-family: "Open Sans", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
   padding: 8vh 0;
   width: 100%;
@@ -23,68 +32,81 @@
   height: 84vh;
   width: 100%;
   background-color: #66b3ff;
-}
-
-.appName {
-  font-size: 3rem;
-  padding: 2rem 0 1rem 0;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .title {
-  padding: 0;
+  font-size: 3rem;
+  padding: 1.25rem 0 0.5rem 0;
+}
+
+.managerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textAreaInput,
+.textInput {
+  border: none;
+  outline: none;
+  width: 15rem;
+  padding: 0.2rem 0.3rem;
+  margin-bottom: 0.25rem;
+  border-radius: 6px;
+}
+
+.textInput {
+  height: 2rem;
+}
+
+.textAreaInput {
+  height: 6rem;
+  resize: none;
 }
 
 .description {
-  margin-bottom: 1rem;
+  width: 40%;
+  height: fit-content;
+  max-height: 5rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: center;
+  font-size: 1.15rem;
+  margin: 0.25rem 0 0.75rem 0;
+  padding: 0 0.5rem 0.75rem 0.5rem;
+  border: 0px solid #fff;
+  border-bottom-width: 2px;
 }
 
-.subTitle {
-  margin-bottom: 0.25rem;
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .proposalContainer {
   display: flex;
+  align-items: center;
   flex-direction: row;
-  margin-bottom: 0.35rem;
-  align-items: center;
-}
-
-.proposalInput {
-  border: none;
-  outline: none;
-  padding: 0.2rem;
-  border-radius: 6px;
-}
-
-.submitButton,
-.proposalButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #fff;
-  border-radius: 6px;
-  outline: none;
-  background-color: transparent;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-left: 0.25rem;
-  color: #fff;
-}
-
-.submitButton {
-  width: auto;
-  padding: 0.2rem 0.5rem;
-  margin: 0.5rem 0 0 0;
-}
-
-.proposalInputContainer {
-  display: flex;
-  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .proposalBox {
-  width: 100%;
-  padding: 0.1rem 0.4rem;
+  display: flex;
+  align-items: center;
+  min-width: 15rem;
+  width: fit-content;
+  height: 2rem;
+  padding: 0 0.35rem;
   border: 2px solid #fff;
   border-radius: 6px;
   background-color: #3399ff;
@@ -102,6 +124,105 @@
   transition: 0.1s;
 }
 
+.button,
+.proposalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  outline: none;
+  background-color: transparent;
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.proposalButton {
+  margin-left: 0.25rem;
+}
+
+.button {
+  width: fit-content;
+  padding: 1rem 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.proposalButton:hover,
+.button:hover {
+  background-color: #3399ff;
+}
+
+.proposalButton:active,
+.button:active {
+  background-color: #0080ff;
+  transform: scale(0.95);
+  transition: 0.15s;
+}
+
+.navButtonContainer .button:hover {
+  border-color: #3399ff;
+  color: #fff;
+}
+
+.navButtonContainer .button:active {
+  border-color: #0080ff;
+  color: #fff;
+}
+
+.proposalList {
+  height: fit-content;
+  max-height: 9rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding-right: 4px;
+  margin-left: 4px;
+  margin-bottom: 0.25rem;
+}
+
+.newProposalContainer {
+  display: flex;
+  margin-right: 6px;
+}
+
+.navButtonContainer,
+.bottomButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 30rem;
+  padding: 0.75rem 0;
+}
+
+.bottomButtonContainer {
+  margin-top: 0.5rem;
+  border: 0px solid #fff;
+  border-top-width: 2px;
+}
+
+.navButtonContainer {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  height: 8vh;
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+}
+
+.navButtonContainer .button {
+  border-color: #66b3ff;
+  color: #66b3ff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.proposalInputContainer {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -111,7 +232,77 @@
   color: #000;
 }
 
+.voteCount {
+  margin-left: 0.5rem;
+}
+
+.delegateVoteContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.delegateVoteSubContainer {
+  display: flex;
+  align-items: center;
+}
+
+.delegateVoteSubContainer .textInput {
+  margin-top: calc(0.25rem + 3px);
+  margin-right: 0.25rem;
+}
+
 @media only screen and (min-width: 600px) {
+  .footer {
+    text-align: end;
+  }
+}
+
+@media only screen and (min-width: 1450px) {
+  .title {
+    padding: 2rem 0 1rem 0;
+    font-size: 3.5rem;
+  }
+
+  .proposalButton {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .proposalBox {
+    height: 2rem;
+    min-width: 20rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .textAreaInput,
+  .textInput {
+    width: 20rem;
+    padding: 0.3rem 0.4rem;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .textInput {
+    height: 2rem;
+  }
+
+  .textAreaInput {
+    margin-bottom: 0.5rem;
+    height: 8rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sectionContainer {
+    margin-bottom: 0.25rem;
+  }
+
   .footer {
     text-align: end;
   }
