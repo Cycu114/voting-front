@@ -262,7 +262,7 @@ export default function App() {
               <div className="delegateVoteContainer">
                 <p>Chcesz oddać swój głos zaufanej osobie ?</p>
                 <div className="delegateVoteSubContainer">
-                  <input className="textInput" placeholder="Adres któremy chcesz oddać głos" type="text" value={adresToDelegate} onChange={e => setAdresToDelegate(e.target.value)} />
+                  <input className="textInput" placeholder="Adres osoby której chcesz oddać głos" type="text" value={adresToDelegate} onChange={e => setAdresToDelegate(e.target.value)} />
                   <button className="button">Przekaż</button>
                 </div>
               </div>
